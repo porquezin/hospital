@@ -11,7 +11,6 @@ public class DB {
         final String pass = "o&89LdE03NWQ";
 
         Connection dbConect = DriverManager.getConnection(url, user, pass);
-        System.out.println("foda");
         dbConect.close();
     }
 }
