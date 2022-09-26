@@ -8,7 +8,7 @@ public class DB {
     public static void main(String[] args) throws SQLException {
         final String url = "jdbc:mysql://50.17.72.170";
         final String user = "root";
-        final String pass = "o&89LdE03NWQ";
+        final String pass = "********";
 
         Connection dbConect = DriverManager.getConnection(url, user, pass);
         dbConect.close();
