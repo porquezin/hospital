@@ -43,4 +43,8 @@ public class Paciente {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String imprimir() {
+        return "ID paciente: " + idPaciente + "\nNome: " + nome;
+    }
 }
