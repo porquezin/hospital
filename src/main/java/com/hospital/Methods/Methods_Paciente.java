@@ -3,6 +3,7 @@ package com.hospital.Methods;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.hospital.DB;
@@ -14,7 +15,7 @@ public class Methods_Paciente {
     ResultSet rs;
     ArrayList<Paciente> arrayPacientes = new ArrayList<Paciente>();
 
-    public void criarPac(Paciente paciente) {
+    public void criarPac(Paciente paciente) throws SQLException {
         String sql = "INSERT INTO Pacientes (nome, email, cpf) values(?,?,?)";
 
         dbConect = new DB().banco();
@@ -32,7 +33,7 @@ public class Methods_Paciente {
         }
     }
 
-    public ArrayList<Paciente> listarPacientes() {
+    public ArrayList<Paciente> listarPacientes() throws SQLException {
         String sql = "select * from Pacientes";
 
         dbConect = new DB().banco();
@@ -53,7 +54,7 @@ public class Methods_Paciente {
         return arrayPacientes;
     }
 
-    public void editarPaciente(Paciente paciente) {
+    public void editarPaciente(Paciente paciente) throws SQLException {
         dbConect = new DB().banco();
         String sql = "update Pacientes set nome = ?, email = ?, cpf = ? where IdPaciente = ?";
 
@@ -71,7 +72,7 @@ public class Methods_Paciente {
         }
     }
 
-    public void excluirPaciente(int id) {
+    public void excluirPaciente(int id) throws SQLException {
         dbConect = new DB().banco();
         String sql = "delete from Pacientes where idPaciente = ?";
 

@@ -1,6 +1,7 @@
 package com.hospital.Models;
 
 public class Medico {
+    private int IdMedico;
     private String nome;
     private Long CRM;
     private String especialidade;
@@ -8,6 +9,12 @@ public class Medico {
         this.nome = nome;
         this.CRM = crm;
         this.especialidade = especialidade;
+    }
+    public int getIdMedico() {
+        return IdMedico;
+    }
+    public void setIdMedico(int idMedico) {
+        IdMedico = idMedico;
     }
     public String getNome() {
         return nome;
