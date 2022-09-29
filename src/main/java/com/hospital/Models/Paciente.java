@@ -1,10 +1,5 @@
 package com.hospital.Models;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
-import com.hospital.DB;
-
 public class Paciente {
     private int idPaciente;
     private String nome;

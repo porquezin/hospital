@@ -1,9 +1,6 @@
 package com.hospital;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import com.hospital.Methods.Methods_Paciente;
 import com.hospital.Models.Paciente;
