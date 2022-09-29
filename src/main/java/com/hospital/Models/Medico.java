@@ -3,9 +3,9 @@ package com.hospital.Models;
 public class Medico {
     private int IdMedico;
     private String nome;
-    private Long CRM;
+    private String CRM;
     private String especialidade;
-    public Medico(String nome, Long crm, String especialidade) {
+    public Medico(String nome, String crm, String especialidade) {
         this.nome = nome;
         this.CRM = crm;
         this.especialidade = especialidade;
@@ -22,10 +22,10 @@ public class Medico {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public Long getCRM() {
+    public String getCRM() {
         return CRM;
     }
-    public void setCRM(Long CRM) {
+    public void setCRM(String CRM) {
         this.CRM = CRM;
     }
     public String getEspecialidade() {

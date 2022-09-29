@@ -4,24 +4,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import com.hospital.DB;
-import com.hospital.Models.Paciente;
 
-public class Methods_Paciente {
+import com.hospital.DB;
+import com.hospital.Models.Medico;
+
+public class Methods_Medico {
     Connection dbConect;
     PreparedStatement pstm;
     ResultSet rs;
-    ArrayList<Paciente> arrayPacientes = new ArrayList<Paciente>();
+    ArrayList<Medico> arrayMedicos = new ArrayList<Medico>();
 
-    public void criarPac(Paciente paciente) throws SQLException {
-        String sql = "INSERT INTO Pacientes (nome, email, cpf) values(?,?,?)";
+    public void criarMed(Medico medico) throws SQLException {
+        String sql = "INSERT INTO Medicos (nome, crm, especialidade) values(?,?,?)";
 
         dbConect = new DB().banco();
         try {
             pstm = dbConect.prepareStatement(sql);
-            pstm.setString(1, paciente.getNome());
-            pstm.setString(2, paciente.getEmail());
-            pstm.setString(3, paciente.getCpf());
+            pstm.setString(1, medico.getNome());
+            pstm.setString(2, medico.getCRM());
+            pstm.setString(3, medico.getEspecialidade());
 
             pstm.execute();
             pstm.close();
@@ -31,8 +32,8 @@ public class Methods_Paciente {
         }
     }
 
-    public ArrayList<Paciente> listarPacientes() throws SQLException {
-        String sql = "select * from Pacientes";
+    public ArrayList<Medico> listarMedicos() throws SQLException {
+        String sql = "select * from Medicos";
 
         dbConect = new DB().banco();
         try {
@@ -40,29 +41,29 @@ public class Methods_Paciente {
             rs = pstm.executeQuery();
 
             while(rs.next()) {
-                Paciente paciente = new Paciente(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"), rs.getString("senha"));
+                Medico medico = new Medico(rs.getString("nome"), rs.getString("crm"), rs.getString("especialidade"));
 
-                paciente.setIdPaciente(rs.getInt("IdPaciente"));
+                medico.setIdMedico(rs.getInt("IdPaciente"));
 
-                arrayPacientes.add(paciente);
+                arrayMedicos.add(medico);
             }
-
+            
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return arrayPacientes;
+        return arrayMedicos;
     }
 
-    public void editarPaciente(Paciente paciente) throws SQLException {
+    public void editarPaciente(Medico medico) throws SQLException {
         dbConect = new DB().banco();
-        String sql = "update Pacientes set nome = ?, email = ?, cpf = ? where IdPaciente = ?";
+        String sql = "update Pacientes set nome = ?, crm = ?, especialidade = ? where IdMedico = ?";
 
         try {
             pstm = dbConect.prepareStatement(sql);
-            pstm.setString(1, paciente.getNome());
-            pstm.setString(2, paciente.getEmail());
-            pstm.setString(3, paciente.getCpf());
-            pstm.setInt(4, paciente.getIdPaciente());
+            pstm.setString(1, medico.getNome());
+            pstm.setString(2, medico.getCRM());
+            pstm.setString(3, medico.getEspecialidade());
+            pstm.setInt(4, medico.getIdMedico());
 
             pstm.execute();
             pstm.close();
@@ -73,7 +74,7 @@ public class Methods_Paciente {
 
     public void excluirPaciente(int id) throws SQLException {
         dbConect = new DB().banco();
-        String sql = "delete from Pacientes where idPaciente = ?";
+        String sql = "delete from Medicos where IdMedico = ?";
 
         try {
             pstm = dbConect.prepareStatement(sql);
