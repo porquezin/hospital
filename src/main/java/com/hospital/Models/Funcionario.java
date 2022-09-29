@@ -1,9 +1,9 @@
 package com.hospital.Models;
 
 public class Funcionario {
+    private String IdFuncionario;
     private String nome;
     private String cargo;
-    private String IdFuncionario;
     public Funcionario(String nome, String cargo, String idFuncionario) {
         this.nome = nome;
         this.cargo = cargo;
