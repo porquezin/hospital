@@ -1,36 +1,24 @@
 package com.hospital;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.hospital.Methods.Methods_Paciente;
+import com.hospital.Models.Paciente;
 
 public class App 
 {
-    public static void main2( String[] args )
+    public static void main( String[] args )
     {
-        Scanner input = new Scanner(System.in);
-        Scanner inputNum = new Scanner(System.in);
+        Methods_Paciente MP = new Methods_Paciente();
+        
+        ArrayList<Paciente> lista = MP.listarPacientes();
 
-        boolean programa = true;
-        while (programa == true) {
-
-            System.out.print("1. Marcar consulta; \n2. Sair \nDigite: ");
-            int escolha = inputNum.nextInt();
-
-            switch (escolha) {
-                case 1:
-                    System.out.println("Sexo 3");
-                    System.out.println("Retornando ao lobby...");
-                    break;
-                case 2:
-                    programa = false;
-                    break;
-            
-                default:
-                    break;
-            }
+        for (Paciente item : lista) {
+            System.out.println(item.getIdPaciente());
+            System.out.println(item.getNome());
         }
 
-        input.close();
-        inputNum.close();
-        System.out.println("Encerrando programa.");
     }
 }

@@ -1,4 +1,4 @@
-package com.hospital;
+package com.hospital.Models;
 
 public class Consulta {
     
