@@ -54,9 +54,9 @@ public class Methods_Medico {
         return arrayMedicos;
     }
 
-    public void editarPaciente(Medico medico) throws SQLException {
+    public void editarMedico(Medico medico) throws SQLException {
         dbConect = new DB().banco();
-        String sql = "update Pacientes set nome = ?, crm = ?, especialidade = ? where IdMedico = ?";
+        String sql = "update Medicos set nome = ?, crm = ?, especialidade = ? where IdMedico = ?";
 
         try {
             pstm = dbConect.prepareStatement(sql);
@@ -72,7 +72,7 @@ public class Methods_Medico {
         }
     }
 
-    public void excluirPaciente(int id) throws SQLException {
+    public void excluirMedico(int id) throws SQLException {
         dbConect = new DB().banco();
         String sql = "delete from Medicos where IdMedico = ?";
 

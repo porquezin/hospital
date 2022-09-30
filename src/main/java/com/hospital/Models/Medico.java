@@ -34,4 +34,8 @@ public class Medico {
     public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
     }
+
+    public String imprimir() {
+        return "ID medico: " + IdMedico + "\nNome: " + nome;
+    }
 }
