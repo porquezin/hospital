@@ -1,29 +1,29 @@
 package com.hospital.Methods;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.hospital.App;
 import com.hospital.DB;
-import com.hospital.Models.Paciente;
+import com.hospital.Models.Consulta;
 
-public class Methods_Paciente {
+public class Methods_Consulta {
     Connection dbConect;
     PreparedStatement pstm;
     ResultSet rs;
-    ArrayList<Paciente> arrayPacientes = new ArrayList<Paciente>();
+    ArrayList<Consulta> arrayConsultas = new ArrayList<Consulta>();
 
-    public void criarPac(Paciente paciente) throws SQLException {
-        String sql = "INSERT INTO Pacientes (nome, email, cpf) values(?,?,?)";
+    public void criarCons(Consulta consulta) throws SQLException {
+        String sql = "INSERT INTO Consultas (IdMedico, IdPaciente, Descrição) values(?,?,?)";
 
         dbConect = new DB().banco();
         try {
             pstm = dbConect.prepareStatement(sql);
-            pstm.setString(1, paciente.getNome());
-            pstm.setString(2, paciente.getEmail());
-            pstm.setString(3, paciente.getCpf());
+            pstm.setInt(1, consulta.getIdMedico());
+            pstm.setInt(2, consulta.getIdPaciente());
+            pstm.setString(3, consulta.getDescricao());
 
             pstm.execute();
             pstm.close();
@@ -35,8 +35,8 @@ public class Methods_Paciente {
         }
     }
 
-    public ArrayList<Paciente> listarPacientes() throws SQLException {
-        String sql = "select * from Pacientes";
+    public ArrayList<Consulta> listarConsultas() throws SQLException {
+        String sql = "select * from Consultas";
 
         dbConect = new DB().banco();
         try {
@@ -44,31 +44,31 @@ public class Methods_Paciente {
             rs = pstm.executeQuery();
 
             while(rs.next()) {
-                Paciente paciente = new Paciente(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"), rs.getString("senha"));
+                Consulta consulta = new Consulta(rs.getInt("IdMedico"), rs.getInt("IdPaciente"), rs.getString("Descrição"));
 
-                paciente.setIdPaciente(rs.getInt("IdPaciente"));
+                consulta.setIdConsulta(rs.getInt("IdConsulta"));
 
-                arrayPacientes.add(paciente);
+                arrayConsultas.add(consulta);
             }
-
+            
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             System.out.println("Reiniciando sistema!");
             App.main(null);
         }
-        return arrayPacientes;
+        return arrayConsultas;
     }
 
-    public void editarPaciente(Paciente paciente) throws SQLException {
+    public void editarConsulta(Consulta consulta) throws SQLException {
         dbConect = new DB().banco();
-        String sql = "update Pacientes set nome = ?, email = ?, cpf = ? where IdPaciente = ?";
+        String sql = "update Consulta set IdMedico = ?, IdPaciente = ?, Descrição = ? where IdConsulta = ?";
 
         try {
             pstm = dbConect.prepareStatement(sql);
-            pstm.setString(1, paciente.getNome());
-            pstm.setString(2, paciente.getEmail());
-            pstm.setString(3, paciente.getCpf());
-            pstm.setInt(4, paciente.getIdPaciente());
+            pstm.setInt(1, consulta.getIdMedico());
+            pstm.setInt(2, consulta.getIdPaciente());
+            pstm.setString(3, consulta.getDescricao());
+            pstm.setInt(4, consulta.getIdConsulta());
 
             pstm.execute();
             pstm.close();
@@ -79,9 +79,9 @@ public class Methods_Paciente {
         }
     }
 
-    public void excluirPaciente(int id) throws SQLException {
+    public void excluirConsulta(int id) throws SQLException {
         dbConect = new DB().banco();
-        String sql = "delete from Pacientes where idPaciente = ?";
+        String sql = "delete from Consultas where IdConsulta = ?";
 
         try {
             pstm = dbConect.prepareStatement(sql);

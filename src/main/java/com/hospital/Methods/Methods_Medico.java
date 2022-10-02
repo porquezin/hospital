@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.hospital.App;
 import com.hospital.DB;
 import com.hospital.Models.Medico;
 
@@ -28,7 +29,9 @@ public class Methods_Medico {
             pstm.close();
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("Reiniciando sistema!");
+            App.main(null);
         }
     }
 
@@ -43,13 +46,15 @@ public class Methods_Medico {
             while(rs.next()) {
                 Medico medico = new Medico(rs.getString("nome"), rs.getString("crm"), rs.getString("especialidade"));
 
-                medico.setIdMedico(rs.getInt("IdPaciente"));
+                medico.setIdMedico(rs.getInt("IdMedico"));
 
                 arrayMedicos.add(medico);
             }
             
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("Reiniciando sistema!");
+            App.main(null);
         }
         return arrayMedicos;
     }
@@ -68,7 +73,9 @@ public class Methods_Medico {
             pstm.execute();
             pstm.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("Reiniciando sistema!");
+            App.main(null);
         }
     }
 
@@ -83,7 +90,9 @@ public class Methods_Medico {
             pstm.execute();
             pstm.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("Reiniciando sistema!");
+            App.main(null);
         }
     }
 }

@@ -5,8 +5,7 @@ public class Consulta {
     private int IdMedico;
     private int IdPaciente;
     private String descricao;
-    public Consulta(int idConsulta, int idMedico, int idPaciente, String descricao) {
-        IdConsulta = idConsulta;
+    public Consulta(int idMedico, int idPaciente, String descricao) {
         IdMedico = idMedico;
         IdPaciente = idPaciente;
         this.descricao = descricao;
@@ -34,5 +33,8 @@ public class Consulta {
     }
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+    public String imprimir() {
+        return "Id Consulta: " + IdConsulta + "\nId Medico: " + IdMedico + "\nIdPaciente: " + IdPaciente + "\nDescrição: " + descricao;
     }
 }

@@ -3,8 +3,11 @@ package com.hospital;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.hospital.Menu.TemplateMenu;
+import com.hospital.Methods.Methods_Consulta;
 import com.hospital.Methods.Methods_Medico;
 import com.hospital.Methods.Methods_Paciente;
+import com.hospital.Models.Consulta;
 import com.hospital.Models.Medico;
 import com.hospital.Models.Paciente;
 
@@ -14,10 +17,18 @@ public class App {
         while (sair != true) {
             int escolha = 0;
             int opcoes = 0;
+
             Methods_Paciente MP = new Methods_Paciente();
             ArrayList<Paciente> listaPacientes = MP.listarPacientes();
+
             Methods_Medico MM = new Methods_Medico();
             ArrayList<Medico> listaMedicos = MM.listarMedicos();
+
+            Methods_Consulta MC = new Methods_Consulta();
+            ArrayList<Consulta> listaConsultas = MC.listarConsultas();
+
+            TemplateMenu menu = new TemplateMenu();
+
             System.out.println();
             System.out.println("Hospital Fox.");
             System.out.println("1 - Paciente\n2 - Medico\n3 - Consulta");
@@ -26,8 +37,7 @@ public class App {
                 case 1:
                     System.out.println();
                     System.out.println("Aba Paciente.");
-                    System.out.println(
-                            "1 - Listar Paciente\n2 - Criar Paciente\n3 - Editar Paciente\n4 - Excluir Paciente");
+                    System.out.println(menu.mostrarMenu("Paciente"));
                     opcoes = Integer.parseInt(System.console().readLine("Digite a opção: "));
                     switch (opcoes) {
                         case 1:
@@ -74,8 +84,8 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Aba Medico.");
-                    System.out.println(
-                            "1 - Listar Medicos\n2 - Criar Medico\n3 - Editar Medico\n4 - Excluir Medico");
+                    System.out.println(menu.mostrarMenu("Medico"));
+                    opcoes = Integer.parseInt(System.console().readLine("Digite a opção: "));
                     switch (opcoes) {
                         case 1:
                             System.out.println("Listar Medicos");
@@ -94,7 +104,7 @@ public class App {
                         case 3:
                             System.out.println("Editar medico");
                             int id = Integer
-                                    .parseInt(System.console().readLine("Informe o Id do paciente que deseja editar"));
+                                    .parseInt(System.console().readLine("Informe o Id do Medico que deseja editar"));
                             nome = System.console().readLine("Nome do medico: ");
                             CRM = System.console().readLine("CRM do medico ");
                             espc = System.console().readLine("Especialidade: ");
@@ -111,6 +121,47 @@ public class App {
                             id = Integer
                                     .parseInt(System.console().readLine("Informe o Id do medico que deseja excluir"));
                             MM.excluirMedico(id);
+                            break;
+                    }
+                    break;
+                case 3:
+                    System.out.println("Aba Consulta.");
+                    System.out.println(menu.mostrarMenu("Consulta"));
+                    opcoes = Integer.parseInt(System.console().readLine("Digite a opção: "));
+                    switch (opcoes) {
+                        case 1:
+                            System.out.println("Listar Consultas");
+                            for (Consulta item : listaConsultas) {
+                                System.out.println(item.imprimir());
+                                System.out.println();
+                            }
+                            break;
+                        case 2:
+                            System.out.println("Criar Consulta");
+                            int IdMedico = Integer.parseInt(System.console().readLine("Id Medico: "));
+                            int IdPaciente = Integer.parseInt(System.console().readLine("Id Paciente: "));
+                            String desc = System.console().readLine("Descrição: ");
+                            MC.criarCons(new Consulta(IdMedico, IdPaciente, desc));
+                            break;
+                        case 3:
+                            System.out.println("Editar Consulta");
+                            int id = Integer
+                                    .parseInt(System.console().readLine("Informe o Id da Consulta que deseja editar: "));
+                            IdMedico = Integer.parseInt(System.console().readLine("Id Medico: "));
+                            IdPaciente = Integer.parseInt(System.console().readLine("Id Paciente: "));
+                            desc = System.console().readLine("Descrição: ");
+                            Consulta consultaEditar = new Consulta(IdMedico, IdPaciente, desc);
+                            consultaEditar.setIdConsulta(id);
+                            MC.editarConsulta(consultaEditar);
+                            break;
+                        case 4:
+                            System.out.println("Excluir Consulta");
+                            for (Consulta item : listaConsultas) {
+                                System.out.println("Id Consulta: " + item.getIdConsulta() + " - " + item.getIdPaciente());
+                            }
+                            id = Integer
+                                    .parseInt(System.console().readLine("Informe o Id da Consulta que deseja excluir"));
+                            MC.excluirConsulta(id);
                             break;
                     }
                     break;
