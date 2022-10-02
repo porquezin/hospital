@@ -31,7 +31,7 @@ public class App {
 
             System.out.println();
             System.out.println("Hospital Fox.");
-            System.out.println("1 - Paciente\n2 - Medico\n3 - Consulta");
+            System.out.println("1 - Paciente\n2 - Medico\n3 - Consulta\n4 - sair");
             escolha = Integer.parseInt(System.console().readLine("Digite a opção: "));
             switch (escolha) {
                 case 1:
@@ -104,7 +104,7 @@ public class App {
                         case 3:
                             System.out.println("Editar medico");
                             int id = Integer
-                                    .parseInt(System.console().readLine("Informe o Id do Medico que deseja editar"));
+                                    .parseInt(System.console().readLine("Informe o Id do Medico que deseja editar: "));
                             nome = System.console().readLine("Nome do medico: ");
                             CRM = System.console().readLine("CRM do medico ");
                             espc = System.console().readLine("Especialidade: ");
@@ -157,14 +157,18 @@ public class App {
                         case 4:
                             System.out.println("Excluir Consulta");
                             for (Consulta item : listaConsultas) {
-                                System.out.println("Id Consulta: " + item.getIdConsulta() + " - " + item.getIdPaciente());
+                                System.out.println("Id Consulta: " + item.getIdConsulta());
+                                System.out.println();
                             }
                             id = Integer
-                                    .parseInt(System.console().readLine("Informe o Id da Consulta que deseja excluir"));
+                                    .parseInt(System.console().readLine("Informe o Id da Consulta que deseja excluir: "));
                             MC.excluirConsulta(id);
                             break;
                     }
                     break;
+                case 4:
+                    System.out.println("Saindo...");
+                    sair = true;
                 default:
                     System.out.println("Erro encontrado");
                     break;
