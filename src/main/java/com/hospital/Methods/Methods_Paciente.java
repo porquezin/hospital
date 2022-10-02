@@ -44,7 +44,7 @@ public class Methods_Paciente {
             rs = pstm.executeQuery();
 
             while(rs.next()) {
-                Paciente paciente = new Paciente(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"), rs.getString("senha"));
+                Paciente paciente = new Paciente(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"));
 
                 paciente.setIdPaciente(rs.getInt("IdPaciente"));
 
