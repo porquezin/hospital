@@ -52,7 +52,6 @@ public class App {
                             String nome = System.console().readLine("Nome Paciente: ");
                             String cpf = System.console().readLine("CPF Paciente: ");
                             String email = System.console().readLine("Email Paciente: ");
-                            String senha = System.console().readLine("Senha Paciente: ");
                             MP.criarPac(new Paciente(nome, cpf, email));
                             break;
                         case 3:
@@ -62,7 +61,6 @@ public class App {
                             nome = System.console().readLine("Nome Paciente: ");
                             cpf = System.console().readLine("CPF Paciente: ");
                             email = System.console().readLine("Email Paciente: ");
-                            senha = System.console().readLine("Senha Paciente: ");
                             Paciente pacienteEditar = new Paciente(nome, cpf, email);
                             pacienteEditar.setIdPaciente(id);
                             MP.editarPaciente(pacienteEditar);
