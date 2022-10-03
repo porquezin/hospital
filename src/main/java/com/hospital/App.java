@@ -15,7 +15,8 @@ public class App {
     public static void main(String[] args) throws SQLException {
         boolean sair = false;
         while (sair != true) {
-            int escolha = 0;
+            try {
+                int escolha = 0;
             int opcoes = 0;
 
             Methods_Paciente MP = new Methods_Paciente();
@@ -171,6 +172,10 @@ public class App {
                     System.out.println("Erro encontrado");
                     break;
             }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            
         }
 
     }
